@@ -10,7 +10,7 @@ import FeaturedProducts from "./FeaturedProducts";
 import ProductImages from "./ProductImages";
 import Stars from "./Stars";
 import AddToCart from "./AddToCart";
-import Filter from "./Filter";
+import Filters from "./Filters";
 import Sort from "./Sort";
 import ProductList from "./ProductList";
 import GridView from "./GridView";
@@ -28,7 +28,7 @@ export {
   ProductImages,
   Stars,
   AddToCart,
-  Filter,
+  Filters,
   Sort,
   ProductList,
   GridView,

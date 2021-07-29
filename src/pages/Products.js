@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { PageHero, Filter, Sort, ProductList } from "../component";
+import { PageHero, Filters, Sort, ProductList } from "../component";
 import { useDispatch } from "react-redux";
 
 import { FilterProductAction } from "../redux/action/FilterProductAction";
@@ -15,7 +15,7 @@ const Products = () => {
       <PageHero title="products" />
       <Wrapper className="page">
         <div className="section-center products">
-          <Filter />
+          <Filters />
           <div>
             <Sort />
             <ProductList />

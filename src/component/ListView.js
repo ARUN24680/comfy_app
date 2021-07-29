@@ -2,21 +2,27 @@ import React from "react";
 import styled from "styled-components";
 import { formatPrice } from "../utility/helpers";
 import { Link } from "react-router-dom";
-
-const ListView = (products) => {
-  console.log(products.products);
+import { useDispatch } from "react-redux";
+import { singleProduct } from "../redux/action/SingleProductAction";
+const ListView = ({ products }) => {
+  const dispatch = useDispatch();
   return (
     <Wrapper>
-      {products.products.length > 0 &&
-        products.products.map(({ id, image, name, price, description }) => {
+      {products.length > 0 &&
+        products.map(({ id, image, name, price, description }) => {
           return (
-            <article>
+            <article key={id}>
               <img src={image} alt={name} />
               <div>
                 <h4>{name}</h4>
                 <h5 className="price">{formatPrice(price)}</h5>
                 <p>{description}</p>
-                <Link to={`/Products/${id}`}> details </Link>
+                <Link
+                  to={`/Products/${id}`}
+                  onClick={() => dispatch(singleProduct(id))}
+                >
+                  details
+                </Link>
               </div>
             </article>
           );

@@ -9,6 +9,7 @@ import PageHero from "../component/PageHero";
 import { ProductImages } from "../component";
 import { Stars } from "../component";
 import { AddToCart } from "../component";
+import { Box, CircularProgress } from "@material-ui/core";
 
 const SingleProductPage = () => {
   const single_Product_ApiData = useSelector(
@@ -47,6 +48,13 @@ const SingleProductPage = () => {
         <Link to="/products" className="btn">
           back to products
         </Link>
+
+        {loading && (
+          <Box display="flex" alignItems="center" justifyContent="center">
+            <CircularProgress style={{ fontSize: "100px" }} disableShrink />
+          </Box>
+        )}
+
         <div className="product-center">
           <ProductImages images={images} />
           <section className="content">

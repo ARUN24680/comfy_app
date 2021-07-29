@@ -2,8 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Product from "./Product";
 
-const GridView = ({products}) => {
-  console.log("grid console", products);
+const GridView = ({ products }) => {
   return (
     <Wrapper>
       <div className="products-container">
