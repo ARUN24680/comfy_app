@@ -6,7 +6,7 @@ import { addSider } from "../redux/action/SidebarAction";
 
 import { Link } from "react-router-dom";
 import { links } from "../utility/constants";
-import { CartButtons } from ".";
+import { CartButtons } from "../component";
 
 import { useDispatch } from "react-redux";
 

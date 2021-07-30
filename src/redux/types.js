@@ -26,7 +26,14 @@ export const LIST_VIEW = "LIST_VIEW";
 
 //sorting grid view
 export const SORT = "SORT";
+export const SORT_PRODUCT = "SORT_PRODUCT";
 
-//filter update 
-export const UPDATE_FILTER ="UPDATE_FILTER";
-export const CLEAR_FILTER ="CLEAR_FILTER"
+//filter update
+export const UPDATE_FILTER = "UPDATE_FILTER";
+export const SEARCH_FILTER = "SEARCH_FILTER";
+export const UPDATE_FILTER_CATEGORY = "UPDATE_FILTER_CATEGORY";
+
+
+
+// CLEAR FILTER
+export const CLEAR_FILTER = "CLEAR_FILTER";

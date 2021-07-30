@@ -1,10 +1,11 @@
-import React from "react";
-// import { getUniqueValues, formatPrice } from "../utils/helpers";
+import React, { useEffect } from "react";
+import { getUniqueValues, formatPrice } from "../utility/helpers";
 import { FaCheck } from "react-icons/fa";
 import styled from "styled-components";
 import {
   FilterProductAction,
   updateFilters,
+  updateFiltersCategory,
   clearFilter,
 } from "../redux/action/FilterProductAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,8 +21,14 @@ const Filter = () => {
     price,
     shipping,
   } = useSelector((state) => state.filterProductReducer?.filter_product);
+  const { all_products } = useSelector((state) => state.filterProductReducer);
   const dispatch = useDispatch();
 
+  const categories = getUniqueValues(all_products, "category");
+  const companies = getUniqueValues(all_products, "company");
+  const colors = getUniqueValues(all_products, "colors");
+
+  // console.log(categories);
   return (
     <Wrapper>
       <div className="content">
@@ -39,6 +46,69 @@ const Filter = () => {
               value={text}
               onChange={(e) => dispatch(updateFilters(e))}
             />
+          </div>
+
+          {/* category */}
+          <div className="form-control">
+            <h5>category</h5>
+            <div>
+              {categories.map((c, index) => {
+                return (
+                  <button
+                    key={index}
+                    onClick={(e) => dispatch(updateFilters(e))}
+                    type="button"
+                    name="category"
+                    // value={c}
+                    className={`${
+                      category === c.toLowerCase() ? "active" : null
+                    }`}
+                  >
+                    {c}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          {/* companies */}
+          <div className="form-control">
+            <h5>companies</h5>
+            <select
+              name="company"
+              value={companies}
+              onChange={(e) => dispatch(updateFilters(e))}
+              className="company"
+            >
+              {companies.map((c, index) => {
+                return (
+                  <option key={index} value={c}>
+                    {c}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          {/* colors */}
+          <div className="from-control">
+            <h5>colors</h5>
+            <div className="colors">
+              {colors.map((c, index) => {
+                return (
+                  <button
+                    key={index}
+                    name="color"
+                    style={{ background: c }}
+                    className={`${
+                      color === c ? "color-btn active" : "color-btn"
+                    }`}
+                    data-color={c}
+                    onClick={(e) => dispatch(updateFilters(e))}
+                  >
+                    {color === c ? <FaCheck /> : null}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </form>
       </div>

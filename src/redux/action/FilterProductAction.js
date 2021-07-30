@@ -6,7 +6,9 @@ import {
   GRID_VIEW,
   LIST_VIEW,
   SORT,
+  SORT_PRODUCT,
   UPDATE_FILTER,
+  UPDATE_FILTER_CATEGORY,
   CLEAR_FILTER,
 } from "../types";
 import { products_url } from "../../utility/constants";
@@ -17,7 +19,6 @@ export const FilterProductAction = () => {
   return async (dispatch) => {
     try {
       dispatch({ type: API_DATA_REQUESTED });
-
       const response = await axios.get(products_url);
       //   console.log("reponse data filter------>", response);
       let all_Product_Data = response.data;
@@ -47,31 +48,6 @@ export const listView = (gridfalse) => {
     payload: gridfalse,
   };
 };
-//FILTER UPDATE
-export const updateFilters = (e) => {
-  let name = e.target.name;
-  let value = e.target.value;
-  // console.log(name);
-
-  return (dispatch) => {
-    dispatch({
-      type: UPDATE_FILTER,
-      payload: { name, value },
-    });
-  };
-};
-//CLEAR FILTER
-export const clearFilters = (e) => {
-  let clearValue = e.target.value;
-  // console.log(clearValue);
-
-  return (dispatch) => {
-    dispatch({
-      type: CLEAR_FILTER,
-      payload: clearValue,
-    });
-  };
-};
 
 //SORTTING
 
@@ -84,9 +60,62 @@ export const updateSort = (e) => {
       payload: clearValue,
     });
   };
+};
 
-  // return {
-  //   type: SORT,
-  //   payload: data
-  // };
+// sort PRODUCT
+
+// export const sortProduct = () => {
+//   return {
+//     type: SORT_PRODUCT,
+//     payload: null
+//   };
+// };
+
+//FILTER UPDATE
+export const updateFilters = (e) => {
+  let name = e.target.name;
+  let value = e.target.value;
+  console.log("update filter", name, value);
+  if (name === "category") {
+    value = e.target.textContent;
+  }
+  if (name === "color") {
+    value = e.target.dataset.color;
+  }
+  return (dispatch) => {
+    dispatch({
+      type: UPDATE_FILTER,
+      payload: { name, value },
+    });
+  };
+};
+
+//updateFiltersCategory
+
+// export const updateFiltersCategory = (e) => {
+//   let name = e.target.name;
+//   let valuesss = e.target.value;
+//   console.log("update filter", name, valuesss);
+//   if (name === "category") {
+//     valuesss = e.target.value;
+//   }
+//   return (dispatch) => {
+//     dispatch({
+//       type: UPDATE_FILTER_CATEGORY,
+//       payload: valuesss
+//     });
+//   };
+// };
+
+//CLEAR FILTER
+export const clearFilters = (e) => {
+  let clearValue = e.target.value;
+  // console.log(clearValue);
+
+  return (dispatch) => {
+    dispatch({
+      type: CLEAR_FILTER,
+      payload: clearValue,
+    });
+  };
 };

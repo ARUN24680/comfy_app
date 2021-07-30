@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BsListUl, BsGrid3X3GapFill } from "react-icons/bs";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
+import { SORT_PRODUCT, SEARCH_FILTER } from "../redux/types";
 import {
   listView,
   gridView,
   updateSort,
+  sortProduct
 } from "../redux/action/FilterProductAction";
 const Sort = () => {
   const productList = useSelector((state) => state.filterProductReducer);
-  const { all_products, grid_view, sort } = productList;
+  const { all_products, grid_view, sort, filter_product } = productList;
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: SEARCH_FILTER });
+    dispatch({ type: SORT_PRODUCT });
+  }, [filter_product, sort]);
 
   return (
     <Wrapper>
@@ -40,10 +47,10 @@ const Sort = () => {
           id="sort"
           className="sort-input"
           value={sort}
-          onChange={(e)=>dispatch(updateSort(e))}
+          onChange={(e) => dispatch(updateSort(e))}
         >
           <option value="price-lowest">price(lowest)</option>
-          <option value="price-highest">price(height)</option>
+          <option value="price-highest">price(highest)</option>
           <option value="name-a">name(a-z)</option>
           <option value="name-z">name(z-a)</option>
         </select>
