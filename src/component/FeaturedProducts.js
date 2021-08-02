@@ -26,7 +26,7 @@ const FeaturedProducts = () => {
       </div>
 
       <div className="section-center featured">
-      {Featured.loading && (
+        {Featured.loading && (
           <Box display="flex" alignItems="center" justifyContent="center">
             <CircularProgress style={{ fontSize: "100px" }} disableShrink />
           </Box>

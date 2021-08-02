@@ -15,6 +15,8 @@ import Sort from "./Sort";
 import ProductList from "./ProductList";
 import GridView from "./GridView";
 import ListView from "./ListView";
+import CartContent from "./CartContent";
+
 export {
   Navbar,
   Sidebar,
@@ -32,5 +34,6 @@ export {
   Sort,
   ProductList,
   GridView,
-  ListView
+  ListView,
+  CartContent,
 };

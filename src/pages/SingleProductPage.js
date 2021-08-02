@@ -15,7 +15,7 @@ const SingleProductPage = () => {
   const single_Product_ApiData = useSelector(
     (state) => state.singleProductReducer
   );
-
+  
   const { singleProduct, error, loading } = single_Product_ApiData;
 
   const {
@@ -27,7 +27,7 @@ const SingleProductPage = () => {
     reviews,
     id: sku,
     company,
-    images
+    images,
   } = singleProduct;
 
   const { id } = useParams();
@@ -75,7 +75,7 @@ const SingleProductPage = () => {
               {company}
             </p>
             <hr />
-            {stock > 0 && <AddToCart />}
+            {stock > 0 && <AddToCart product={singleProduct} />}
           </section>
         </div>
       </div>
