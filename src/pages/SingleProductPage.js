@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams, useHistory, Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { formatPrice } from "../utility/helpers";
 
 import styled from "styled-components";
@@ -15,7 +15,7 @@ const SingleProductPage = () => {
   const single_Product_ApiData = useSelector(
     (state) => state.singleProductReducer
   );
-  
+  // console.log(single_Product_ApiData);
   const { singleProduct, error, loading } = single_Product_ApiData;
 
   const {
@@ -27,10 +27,9 @@ const SingleProductPage = () => {
     reviews,
     id: sku,
     company,
-    images,
+    images
   } = singleProduct;
 
-  const { id } = useParams();
   const history = useHistory();
 
   useEffect(() => {
@@ -39,7 +38,7 @@ const SingleProductPage = () => {
         history.push("/");
       }, 3000);
     }
-  }, []);
+  }, [error]);
 
   return (
     <Wrapper>
@@ -48,7 +47,6 @@ const SingleProductPage = () => {
         <Link to="/products" className="btn">
           back to products
         </Link>
-
         {loading && (
           <Box display="flex" alignItems="center" justifyContent="center">
             <CircularProgress style={{ fontSize: "100px" }} disableShrink />

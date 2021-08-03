@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 const ProductsImages = ({ images = [{ url: "" }] }) => {
   const [main, setMain] = useState(images[0]);
-  //  useEffect(() => {}, [main]);
+
+  useEffect(() => {}, [main]);
   return (
     <Wrapper>
       <img src={main.url} alt="main_image" className="main" />

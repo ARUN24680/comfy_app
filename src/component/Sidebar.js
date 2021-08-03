@@ -32,17 +32,12 @@ const Sidebar = () => {
           {links.map(({ id, text, url }) => {
             return (
               <li key={id}>
-                <Link to={url} onClick={() => dispatch(removeSider(false))}>
-                  {" "}
-                  {text}{" "}
-                </Link>
+                <Link to={url} onClick={() => dispatch(removeSider(false))}  > {text} </Link>
               </li>
             );
           })}
           <li>
-            <Link to="/checkout" onClick={() => dispatch(removeSider(false))}>
-              checkout
-            </Link>
+            <Link to="/checkout" onClick={() => dispatch(removeSider(false))} >checkout</Link>
           </li>
         </ul>
       </aside>

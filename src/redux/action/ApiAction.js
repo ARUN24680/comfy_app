@@ -13,11 +13,10 @@ export const ApiAction = () => {
       // console.log("fkter========>", filterData);
       dispatch({
         type: API_DATA,
-        payload: filterData,
+        payload: filterData
       });
     } catch (e) {
       dispatch({ type: API_DATA_FAILURE, payload: e.message });
     }
   };
 };
-

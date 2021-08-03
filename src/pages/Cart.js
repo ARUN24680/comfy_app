@@ -5,7 +5,8 @@ import { CartContent, PageHero } from "../component";
 import { useSelector } from "react-redux";
 
 const Cart = () => {
-  const cartData = useSelector((state) => state.AddToCartReducer);
+  const cartData = useSelector((state) => state.addToCartReducer);
+  console.log(cartData);
   const { cart } = cartData;
 
   useEffect(() => {
@@ -28,7 +29,7 @@ const Cart = () => {
     <main>
       <PageHero title="cart" />
       <Wrapper className="page">
-        <CartContent />
+        <CartContent cartProduct={cart} />
       </Wrapper>
     </main>
   );

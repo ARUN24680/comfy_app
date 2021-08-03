@@ -15,7 +15,7 @@ export const SINGLE_PRODUCT = "SINGLE_PRODUCT";
 
 //filter product
 
-export const FILTER_PRODUCT = "FILTER_PRODUCT";
+export const FILTER_PRODUCT_DISPLAY = "FILTER_PRODUCT_DISPLAY";
 
 // all product
 export const ALL_PRODUCTS = "ALL_PRODUCTS";
@@ -33,11 +33,15 @@ export const UPDATE_FILTER = "UPDATE_FILTER";
 export const SEARCH_FILTER = "SEARCH_FILTER";
 export const UPDATE_FILTER_CATEGORY = "UPDATE_FILTER_CATEGORY";
 
-
-
 // CLEAR FILTER
 export const CLEAR_FILTER = "CLEAR_FILTER";
 
-// ADD TO CART
-
+//ADD_TO_CART
 export const ADD_TO_CART = "ADD_TO_CART";
+
+//CLEAR_CART
+export const CLEAR_CART = "CLEAR_CART";
+
+// CART TOOGLE AND REMOVE
+export const TOOGLE = "TOOGLE";
+export const REMOVE = "REMOVE";

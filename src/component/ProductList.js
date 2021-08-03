@@ -6,14 +6,14 @@ import { Box, CircularProgress } from "@material-ui/core";
 const ProductList = () => {
   const productList = useSelector((state) => state.filterProductReducer);
   const {
-    filter_product,
-    all_products,
+    filter_all_product,
+
     loading,
     grid_view,
     error
   } = productList;
 
-  if (all_products < 1) {
+  if (filter_all_product < 1) {
     <h5 style={{ textTransform: "none" }}> sorry no product matches</h5>;
   }
 
@@ -25,7 +25,7 @@ const ProductList = () => {
             <CircularProgress style={{ fontSize: "100px" }} disableShrink />
           </Box>
         )}
-        <ListView products={all_products} />
+        <ListView products={filter_all_product} />
       </>
     );
   }
@@ -37,7 +37,7 @@ const ProductList = () => {
           <CircularProgress style={{ fontSize: "100px" }} disableShrink />
         </Box>
       )}
-      <GridView products={all_products}> </GridView>
+      <GridView products={filter_all_product}> </GridView>
     </>
   );
 };

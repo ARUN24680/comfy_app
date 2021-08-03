@@ -5,8 +5,8 @@ import styled from "styled-components";
 import {
   FilterProductAction,
   updateFilters,
-  updateFiltersCategory,
   clearFilter,
+  clearFilters
 } from "../redux/action/FilterProductAction";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -19,7 +19,7 @@ const Filter = () => {
     minPrice,
     maxPrice,
     price,
-    shipping,
+    shipping
   } = useSelector((state) => state.filterProductReducer?.filter_product);
   const { all_products } = useSelector((state) => state.filterProductReducer);
   const dispatch = useDispatch();
@@ -48,7 +48,7 @@ const Filter = () => {
             />
           </div>
 
-          {/* category */}
+          {/* category filter*/}
           <div className="form-control">
             <h5>category</h5>
             <div>
@@ -70,12 +70,12 @@ const Filter = () => {
               })}
             </div>
           </div>
-          {/* companies */}
+          {/* companies filter */}
           <div className="form-control">
             <h5>companies</h5>
             <select
               name="company"
-              value={companies}
+              value={`${companies}`}
               onChange={(e) => dispatch(updateFilters(e))}
               className="company"
             >
@@ -88,7 +88,7 @@ const Filter = () => {
               })}
             </select>
           </div>
-          {/* colors */}
+          {/* colors filter */}
           <div className="from-control">
             <h5>colors</h5>
             <div className="colors">
@@ -110,6 +110,37 @@ const Filter = () => {
               })}
             </div>
           </div>
+          {/* price  filter */}
+          <div className="from-control">
+            <h5>price</h5>
+            <p className="price">{formatPrice(price)}</p>
+            <input
+              type="range"
+              name="price"
+              id=""
+              onChange={(e) => dispatch(updateFilters(e))}
+              min={minPrice}
+              max={maxPrice}
+              value={price}
+            />
+          </div>
+          <div className="form-control shipping">
+            <lable htmlFor="shipping"> free shipping</lable>
+            <input
+              type="checkbox"
+              name="shipping"
+              id="shipping"
+              onChange={(e) => dispatch(updateFilters(e))}
+              checked={shipping}
+            />
+          </div>
+          <button
+            type="button"
+            className="clear-btn"
+            onClick={(e) => dispatch(clearFilters(e))}
+          >
+            clear filters
+          </button>
         </form>
       </div>
     </Wrapper>

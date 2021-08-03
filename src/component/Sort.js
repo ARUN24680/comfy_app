@@ -6,13 +6,12 @@ import { SORT_PRODUCT, SEARCH_FILTER } from "../redux/types";
 import {
   listView,
   gridView,
-  updateSort,
-  sortProduct
+  updateSort
 } from "../redux/action/FilterProductAction";
 const Sort = () => {
   const productList = useSelector((state) => state.filterProductReducer);
-  const { all_products, grid_view, sort, filter_product } = productList;
-
+  const { filter_all_product, grid_view, sort, filter_product } = productList;
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,7 +37,7 @@ const Sort = () => {
           <BsListUl />
         </button>
       </div>
-      <p>{all_products.length} product found </p>
+      <p>{filter_all_product.length} product found </p>
       <hr />
       <form>
         <label htmlFor="sort"> sort by </label>

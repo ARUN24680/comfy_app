@@ -1,30 +1,26 @@
-import { ADD_TO_CART } from "../types";
+import { ADD_TO_CART, CLEAR_CART, REMOVE, TOOGLE } from "../types";
 
-const AddToCartProduct = (data) => {
-
+export const addToCartProduct = (data) => {
   return {
     type: ADD_TO_CART,
-    payload: data,
+    payload: data
   };
 };
-// const RemoveItem = (id) => {
-//   return {
-//     type:  ,
-//     payload:  ,
-//   };
-// };
-// const ToogleAmount = (id,value) => {
-//   return {
-//     type:    ,
-//     payload:  ,
-//   };
-// };
+export const removeItem = (id) => {
+  return {
+    type: REMOVE,
+    payload: id
+  };
+};
+export const toogleAmount = (id, value) => {
+  return {
+    type: TOOGLE
+  };
+};
 
-// const ClearCart = (  ) => {
-//   return {
-//     type: ,
-//     payload:  ,
-//   };
-// };
-
-export default AddToCartProduct;
+export const clearCart = () => {
+  return {
+    type: CLEAR_CART,
+    payload: null
+  };
+};

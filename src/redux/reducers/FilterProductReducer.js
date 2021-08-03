@@ -1,6 +1,6 @@
 import {
   ALL_PRODUCTS,
-  FILTER_PRODUCT,
+  FILTER_PRODUCT_DISPLAY,
   API_DATA_REQUESTED,
   API_DATA_FAILURE,
   GRID_VIEW,
@@ -9,9 +9,9 @@ import {
   SORT_PRODUCT,
   UPDATE_FILTER,
   SEARCH_FILTER,
-  UPDATE_FILTER_CATEGORY,
   CLEAR_FILTER
 } from "../types";
+import { products_url } from "../../utility/constants";
 
 const istate = {
   filter_product: {
@@ -57,7 +57,7 @@ const FilterProductReducer = (state = istate, action) => {
   //
   //
   //
-  //
+
   // API_DATA_REQUESTED
   else if (action.type === API_DATA_REQUESTED) {
     return {
@@ -143,25 +143,77 @@ const FilterProductReducer = (state = istate, action) => {
       filter_product: { ...state.filter_product, [name]: value }
     };
   }
-
   //search FILTER
   else if (action.type === SEARCH_FILTER) {
-    return { ...state };
-  }
+    const { all_products } = state;
+    let tempProducts = [...all_products];
+    const {
+      text,
+      category,
+      company,
+      color,
 
-  //updateFiltersCategory
-  else if (action.type === UPDATE_FILTER_CATEGORY) {
-    // return { ...state, filter_product: {...state.category action.payload } };
+      price,
+      shipping
+    } = state.filter_product;
+    // filtering
+    if (text) {
+      tempProducts = tempProducts.filter((product) => {
+        return product.name.toLowerCase().startsWith(text);
+      });
+    }
+    if (category !== "all") {
+      tempProducts = tempProducts.filter(
+        (product) => product.category === category
+      );
+    }
+    if (company !== "all") {
+      tempProducts = tempProducts.filter(
+        (product) => product.company === company
+      );
+    }
+    if (color !== "all") {
+      tempProducts = tempProducts.filter((product) => {
+        return product.colors.find((c) => c === color);
+      });
+    }
+    if (price) {
+      tempProducts = tempProducts.filter((product) => product.price <= price);
+    }
+    if (shipping) {
+      tempProducts = tempProducts.filter(
+        (product) => product.shipping === true
+      );
+    }
+    return { ...state, filter_all_product: tempProducts };
+
+    // return { ...state };
   }
 
   //FILTER CLEAR
   else if (action.type === CLEAR_FILTER) {
     return {
       ...state,
-      loading: false,
-      filter_product: action.payload
+      filter_product: {
+        ...state.filter_product,
+        text: "",
+        company: "all",
+        category: "all",
+        color: "all",
+        price: state.filter_product.maxPrice,
+        shipping: false
+      }
     };
-  } else {
+  }
+  //FILTER_PRODUCT_DISPLAY
+  else if (action.type === FILTER_PRODUCT_DISPLAY) {
+  }
+
+  //
+  //
+  //
+  //
+  else {
     return state;
   }
 };

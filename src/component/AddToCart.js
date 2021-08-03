@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import AmountButtons from "./AmountButtons";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import AddToCartProduct from "../redux/action/AddToCartAction";
-import AmountButtons from "./AmountButtons";
+import { addToCartProduct } from "../redux/action/AddToCartAction";
 
 const AddToCart = ({ product }) => {
   const dispatch = useDispatch();
@@ -62,7 +62,7 @@ const AddToCart = ({ product }) => {
           to="/cart"
           className="btn"
           onClick={() =>
-            dispatch(AddToCartProduct({ id, mainColor, amount, product }))
+            dispatch(addToCartProduct({ id, mainColor, amount, product }))
           }
         >
           add to cart
@@ -71,7 +71,6 @@ const AddToCart = ({ product }) => {
     </Wrapper>
   );
 };
-
 const Wrapper = styled.section`
   margin-top: 2rem;
   .colors {
