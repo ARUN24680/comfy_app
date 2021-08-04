@@ -9,8 +9,13 @@ import { useDispatch } from "react-redux";
 
 const CartItem = ({ image, name, amount, max, id, mainColor, price }) => {
   const dispatch = useDispatch();
-  const increase = () => {};
-  const decrease = () => {};
+
+  const increaseCart = () => {
+    dispatch(toogleAmount(id, "inc"));
+  };
+  const decreaseCart = () => {
+    dispatch(toogleAmount(id, "dec"));
+  };
 
   return (
     <Wrapper>
@@ -25,7 +30,11 @@ const CartItem = ({ image, name, amount, max, id, mainColor, price }) => {
         </div>
       </div>
       <h5 className="price">{formatPrice(price)}</h5>
-      <AmountButtons amount={amount} increase={increase} decrease={decrease} />
+      <AmountButtons
+        amount={amount}
+        increase={increaseCart}
+        decrease={decreaseCart}
+      />
 
       <h5 className="subtotal">{formatPrice(price * amount)}</h5>
       <button

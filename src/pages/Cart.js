@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 const Cart = () => {
   const cartData = useSelector((state) => state.addToCartReducer);
-  console.log(cartData);
+
   const { cart } = cartData;
 
   useEffect(() => {

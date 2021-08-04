@@ -1,4 +1,5 @@
 import { ADD_TO_CART, CLEAR_CART, REMOVE, TOOGLE } from "../types";
+import { breakStatement } from "@babel/types";
 
 const addToCartFn = () => {
   let cart = localStorage.getItem("cart");
@@ -17,18 +18,22 @@ const initialState = {
 };
 
 const AddToCartProduct = (state = initialState, action) => {
-  // console.log(action.payload);
   switch (action.type) {
-    case ADD_TO_CART:
+    //ADD_TO_CART
+    case ADD_TO_CART: {
       const { id, mainColor, amount, product } = action.payload;
-      const tempItem = state.cart.find((i) => i.id === id + mainColor);
+      const cartState = [...state.cart];
+      const tempItem = cartState.find((i) => i.id === id + mainColor);
+
       if (tempItem) {
         const tempCart = state.cart.map((cartItem) => {
           if (cartItem.id === id + mainColor) {
             let newAmount = cartItem.amount + amount;
+
             if (newAmount > cartItem.max) {
               newAmount = cartItem.max;
             }
+
             return { ...cartItem, amount: newAmount };
           } else {
             return cartItem;
@@ -50,7 +55,8 @@ const AddToCartProduct = (state = initialState, action) => {
           cart: [...state.cart, newItem],
         };
       }
-
+    }
+    //REMOVE
     case REMOVE:
       const tempCart = state.cart.filter((item) => item.id !== action.payload);
       return {
@@ -58,10 +64,37 @@ const AddToCartProduct = (state = initialState, action) => {
         cart: tempCart,
       };
 
+    //TOOGLE
     case TOOGLE:
+      const { cartId, value } = action.payload;
+      // let amountToggle = [...state.cart];
+
+      const newCartValue = state.cart.map((item) => {
+        if (item.id === cartId) {
+          if (value === "inc") {
+            let newAmount = item.amount + 1;
+            if (newAmount > item.max) {
+              newAmount = item.max;
+            }
+            return { ...item, amount: newAmount };
+          }
+          if (value === "dec") {
+            let newAmount = item.amount - 1;
+            if (newAmount < 1) {
+              newAmount = 1;
+            }
+            return { ...item, amount: newAmount };
+          }
+        }
+        return item;
+      });
+
       return {
-        cart: null,
+        ...state,
+        cart: newCartValue,
       };
+
+    //CLEAR_CART
 
     case CLEAR_CART:
       return {

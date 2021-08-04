@@ -8,12 +8,21 @@ import { Link } from "react-router-dom";
 import { links } from "../utility/constants";
 import { CartButtons } from "../component";
 
+// import { useAuth0 } from "@auth0/auth0-react";
+
 import { useDispatch } from "react-redux";
 
 const Navebar = () => {
   const [sidebar, setSidebar] = useState(true);
-
   const dispatch = useDispatch();
+  // const {
+  //   isLoading,
+  //   isAuthenticated,
+  //   error,
+  //   user,
+  //   loginWithRedirect,
+  //   logout
+  // } = useAuth0();
 
   return (
     <NavContainer>
@@ -30,7 +39,7 @@ const Navebar = () => {
           </button>
         </div>
         <ul className="nav-links">
-        {links.map(({ id, text, url }) => {
+          {links.map(({ id, text, url }) => {
             return (
               <li key={id}>
                 <Link to={url}>{text}</Link>

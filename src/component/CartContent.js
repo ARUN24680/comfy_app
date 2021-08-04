@@ -5,7 +5,6 @@ import CartColumns from "./CartColumns";
 import CartItem from "./CartItem";
 import CartTotals from "./CartTotals";
 import { useDispatch } from "react-redux";
-// import { CLEAR_CART } from "../redux/types";
 
 import { clearCart } from "../redux/action/AddToCartAction";
 
@@ -17,10 +16,12 @@ const CartContent = ({ cartProduct }) => {
       <CartColumns />
       <hr />
 
-      {cartProduct.map((item) => {
-        return <CartItem key={item.id} {...item} />;
-      })}
-
+      {cartProduct &&
+        cartProduct.length > 0 &&
+        cartProduct.map((item) => {
+          console.log("cart item==>",item)
+          return <CartItem key={item.id} {...item} />;
+        })}
       <hr />
 
       <div className="link-container">

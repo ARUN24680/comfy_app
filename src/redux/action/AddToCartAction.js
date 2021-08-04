@@ -12,15 +12,15 @@ export const removeItem = (id) => {
     payload: id
   };
 };
-export const toogleAmount = (id, value) => {
+export const toogleAmount = (cartId, value) => {
   return {
-    type: TOOGLE
+    type: TOOGLE,
+    payload: { cartId, value }
   };
 };
 
 export const clearCart = () => {
   return {
-    type: CLEAR_CART,
-    payload: null
+    type: CLEAR_CART
   };
 };
