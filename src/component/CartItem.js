@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { formatPrice } from "../utility/helpers";
 import AmountButtons from "./AmountButtons";
 import { FaTrash } from "react-icons/fa";
-import { removeItem, toogleAmount } from "../redux/action/AddToCartAction";
+import {
+  cartTotals,
+  removeItem,
+  toogleAmount,
+} from "../redux/action/AddToCartAction";
 import { color } from "@material-ui/system";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const CartItem = ({ image, name, amount, max, id, mainColor, price }) => {
   const dispatch = useDispatch();
+  const { cart } = useSelector((state) => state.addToCartReducer);
 
   const increaseCart = () => {
     dispatch(toogleAmount(id, "inc"));
@@ -16,6 +21,10 @@ const CartItem = ({ image, name, amount, max, id, mainColor, price }) => {
   const decreaseCart = () => {
     dispatch(toogleAmount(id, "dec"));
   };
+
+  useEffect(() => {
+    dispatch(cartTotals());
+  }, [cart]);
 
   return (
     <Wrapper>
@@ -40,7 +49,9 @@ const CartItem = ({ image, name, amount, max, id, mainColor, price }) => {
       <button
         type="button"
         className="remove-btn"
-        onClick={() => dispatch(removeItem(id))}
+        onClick={() => {
+          dispatch(removeItem(id));
+        }}
       >
         <FaTrash />
       </button>

@@ -8,10 +8,13 @@ import { removeSider } from "../redux/action/SidebarAction";
 
 import { FaTimes } from "react-icons/fa";
 import styled from "styled-components";
+import { CartButtons } from ".";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Sidebar = () => {
   const isOpen = useSelector((state) => state.sidebarReducer);
   const dispatch = useDispatch();
+  const { user } = useAuth0();
 
   return (
     <SidebarContainer>
@@ -32,14 +35,21 @@ const Sidebar = () => {
           {links.map(({ id, text, url }) => {
             return (
               <li key={id}>
-                <Link to={url} onClick={() => dispatch(removeSider(false))}  > {text} </Link>
+                <Link to={url} onClick={() => dispatch(removeSider(false))}>
+                  {text}
+                </Link>
               </li>
             );
           })}
-          <li>
-            <Link to="/checkout" onClick={() => dispatch(removeSider(false))} >checkout</Link>
-          </li>
+          {user && (
+            <li>
+              <Link to="/checkout" onClick={() => dispatch(removeSider(false))}>
+                checkout
+              </Link>
+            </li>
+          )}
         </ul>
+        <CartButtons />
       </aside>
     </SidebarContainer>
   );

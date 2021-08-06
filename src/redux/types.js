@@ -45,3 +45,6 @@ export const CLEAR_CART = "CLEAR_CART";
 // CART TOOGLE AND REMOVE
 export const TOOGLE = "TOOGLE";
 export const REMOVE = "REMOVE";
+
+//CART_TOTALS
+export const CART_TOTALS = "CART_TOTALS";

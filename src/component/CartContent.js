@@ -16,12 +16,10 @@ const CartContent = ({ cartProduct }) => {
       <CartColumns />
       <hr />
 
-      {cartProduct &&
-        cartProduct.length > 0 &&
-        cartProduct.map((item) => {
-          console.log("cart item==>",item)
-          return <CartItem key={item.id} {...item} />;
-        })}
+      {cartProduct.map((item) => {
+        return <CartItem key={item.id} {...item} />;
+      })}
+
       <hr />
 
       <div className="link-container">

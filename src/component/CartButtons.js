@@ -1,22 +1,68 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaUserPlus, FaUserMinus, FaShoppingCart } from "react-icons/fa";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { removeSider } from "../redux/action/SidebarAction";
+
+import { cartTotals } from "../redux/action/AddToCartAction";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useSelector, useDispatch } from "react-redux";
+
 function CartButtons() {
+  const { total_items } = useSelector((state) => state.addToCartReducer);
+  const dispatch = useDispatch();
+  const {
+    isAuthenticated,
+
+    user,
+    loginWithRedirect,
+    logout
+  } = useAuth0();
+
+  const [logged, setLogged] = useState(null);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      setLogged(user);
+    } else {
+      setLogged(false);
+    }
+  }, [isAuthenticated]);
+
+  
   return (
     <Wrapper className="cart-btn-wrapper">
-      <Link to="/cart" className="cart-btn">
+      <Link
+        to="/cart"
+        className="cart-btn"
+        onClick={() => dispatch(removeSider(false))}
+      >
         cart
         <span className="cart-container">
           <FaShoppingCart />
 
-          <span className="cart-value">12</span>
+          <span className="cart-value">{total_items}</span>
         </span>
       </Link>
-      <button type="button" className="auth-btn">
-        login
-        <FaUserPlus />
-      </button>
+      {user ? (
+        <button
+          type="button"
+          className="auth-btn"
+          onClick={() => logout({ returnTo: window.location.origin })}
+        >
+          logout
+          <FaUserMinus />
+        </button>
+      ) : (
+        <button
+          type="button"
+          className="auth-btn"
+          onClick={() => loginWithRedirect()}
+        >
+          login
+          <FaUserPlus />
+        </button>
+      )}
     </Wrapper>
   );
 }

@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { formatPrice } from "../utility/helpers";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const CartTotals = () => {
   const cartData = useSelector((state) => state.addToCartReducer);
   const { total_amount, shipping_fee } = cartData;
+  const { loginWithRedirect, user } = useAuth0();
+
+  // useEffect(() => {}, [total_amount]);
+
   return (
     <Wrapper>
       <div>
@@ -15,7 +20,7 @@ const CartTotals = () => {
             subtotal: <span> {formatPrice(total_amount)} </span>
           </h5>
           <p>
-            subtotal: <span> {formatPrice(shipping_fee)} </span>
+            shipping fee: <span> {formatPrice(shipping_fee)} </span>
           </p>
           <hr />
           <h4>
@@ -23,9 +28,15 @@ const CartTotals = () => {
             <span>{formatPrice(total_amount + shipping_fee)} </span>
           </h4>
         </article>
-        <Link to="/checkout" className="btn">
-          proceed to checkout
-        </Link>
+        {user ? (
+          <Link to="/checkout" className="btn">
+            proceed to checkout
+          </Link>
+        ) : (
+          <button className="btn" onClick={() => loginWithRedirect()}>
+            login
+          </button>
+        )}
       </div>
     </Wrapper>
   );

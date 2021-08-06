@@ -1,5 +1,4 @@
-import { ADD_TO_CART, CLEAR_CART, REMOVE, TOOGLE } from "../types";
-import { breakStatement } from "@babel/types";
+import { ADD_TO_CART, CLEAR_CART, REMOVE, TOOGLE, CART_TOTALS } from "../types";
 
 const addToCartFn = () => {
   let cart = localStorage.getItem("cart");
@@ -65,10 +64,9 @@ const AddToCartProduct = (state = initialState, action) => {
       };
 
     //TOOGLE
-    case TOOGLE:
+    case TOOGLE: {
       const { cartId, value } = action.payload;
       // let amountToggle = [...state.cart];
-
       const newCartValue = state.cart.map((item) => {
         if (item.id === cartId) {
           if (value === "inc") {
@@ -88,18 +86,41 @@ const AddToCartProduct = (state = initialState, action) => {
         }
         return item;
       });
-
       return {
         ...state,
         cart: newCartValue,
       };
-
+    }
     //CLEAR_CART
 
     case CLEAR_CART:
       return {
         ...state,
         cart: [],
+      };
+
+    //CART_TOTALS
+    case CART_TOTALS:
+      const cart_checkout = [...state.cart ];
+      const { total_items, total_amount } = cart_checkout.reduce(
+        (total, cartItem) => {
+          const { amount, price } = cartItem;
+          total.total_items += amount;
+          total.total_amount += price * amount;
+          return total;
+        },
+        {
+          total_items: 0,
+          total_amount: 0,
+        }
+      );
+      console.log("totali tiensn=>", total_items);
+      console.log("totali amount=>", total_amount);
+
+      return {
+        ...state,
+        total_items,
+        total_amount,
       };
 
     default:

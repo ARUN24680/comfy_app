@@ -8,21 +8,14 @@ import { Link } from "react-router-dom";
 import { links } from "../utility/constants";
 import { CartButtons } from "../component";
 
-// import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import { useDispatch } from "react-redux";
 
 const Navebar = () => {
   const [sidebar, setSidebar] = useState(true);
   const dispatch = useDispatch();
-  // const {
-  //   isLoading,
-  //   isAuthenticated,
-  //   error,
-  //   user,
-  //   loginWithRedirect,
-  //   logout
-  // } = useAuth0();
+  const { user } = useAuth0();
 
   return (
     <NavContainer>
@@ -46,6 +39,11 @@ const Navebar = () => {
               </li>
             );
           })}
+          {user && (
+            <li>
+              <Link to="/checkout">checkout</Link>
+            </li>
+          )}
         </ul>
         <div>
           <CartButtons />

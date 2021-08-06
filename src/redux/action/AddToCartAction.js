@@ -1,4 +1,4 @@
-import { ADD_TO_CART, CLEAR_CART, REMOVE, TOOGLE } from "../types";
+import { ADD_TO_CART, CLEAR_CART, REMOVE, TOOGLE, CART_TOTALS } from "../types";
 
 export const addToCartProduct = (data) => {
   return {
@@ -22,5 +22,11 @@ export const toogleAmount = (cartId, value) => {
 export const clearCart = () => {
   return {
     type: CLEAR_CART
+  };
+};
+
+export const cartTotals = () => {
+  return {
+    type: CART_TOTALS
   };
 };
