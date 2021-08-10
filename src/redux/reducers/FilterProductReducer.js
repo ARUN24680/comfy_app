@@ -11,7 +11,7 @@ import {
   SEARCH_FILTER,
   CLEAR_FILTER
 } from "../types";
-import { products_url } from "../../utility/constants";
+// import { products_url } from "../../utility/constants";
 
 const istate = {
   filter_product: {

@@ -48,3 +48,6 @@ export const REMOVE = "REMOVE";
 
 //CART_TOTALS
 export const CART_TOTALS = "CART_TOTALS";
+
+//private Routing
+export const PRIVATE_ROUTE = "PRIVATE_ROUTE";

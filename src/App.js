@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {
   Home,
@@ -8,52 +8,53 @@ import {
   Cart,
   Error,
   Checkout,
-  PrivateRoute
+  PrivateRoute,
+  AuthWrapper,
 } from "./pages";
 import { Navbar, Sidebar, Footer } from "./component";
-import { Provider } from "react-redux";
-
-import store from "./redux/store/store";
 
 function App() {
   return (
-    <Provider store={store}>
-      <Router>
-        <Navbar />
-        <Sidebar />
+    <>
+      <AuthWrapper>
+        <Router>
+          <Navbar />
+          <Sidebar />
 
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
 
-          <Route exact path="/About">
-            <About />
-          </Route>
+            <Route exact path="/About">
+              <About />
+            </Route>
 
-          <Route exact path="/Cart">
-            <Cart />
-          </Route>
+            <Route exact path="/Cart">
+              <Cart />
+            </Route>
 
-          <Route exact path="/Products">
-            <Products />
-          </Route>
-          <Route exact path="/Products/:id" >
-          <SingleProductPage/>
-          </Route>
+            <Route exact path="/Products">
+              <Products />
+            </Route>
 
-          <Route exact path="/Checkout">
-            <Checkout />
-          </Route>
+            <Route exact path="/Products/:id">
+              <SingleProductPage />
+            </Route>
 
-          <Route path="*">
-            <Error />
-          </Route>
-        </Switch>
+            <PrivateRoute exact path="/Checkout">
+              <Checkout />
+            </PrivateRoute>
 
-        <Footer />
-      </Router>
-    </Provider>
+            <Route path="*">
+              <Error />
+            </Route>
+          </Switch>
+
+          <Footer />
+        </Router>
+      </AuthWrapper>
+    </>
   );
 }
 

@@ -10,8 +10,6 @@ const CartTotals = () => {
   const { total_amount, shipping_fee } = cartData;
   const { loginWithRedirect, user } = useAuth0();
 
-  // useEffect(() => {}, [total_amount]);
-
   return (
     <Wrapper>
       <div>
@@ -23,6 +21,7 @@ const CartTotals = () => {
             shipping fee: <span> {formatPrice(shipping_fee)} </span>
           </p>
           <hr />
+
           <h4>
             order total:
             <span>{formatPrice(total_amount + shipping_fee)} </span>

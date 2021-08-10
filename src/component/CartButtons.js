@@ -4,32 +4,31 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { removeSider } from "../redux/action/SidebarAction";
 
-import { cartTotals } from "../redux/action/AddToCartAction";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useSelector, useDispatch } from "react-redux";
+import { protectRoute } from "../redux/action/ProtectAction";
 
 function CartButtons() {
-  const { total_items } = useSelector((state) => state.addToCartReducer);
   const dispatch = useDispatch();
-  const {
-    isAuthenticated,
+  const { total_items } = useSelector((state) => state.addToCartReducer);
 
-    user,
-    loginWithRedirect,
-    logout
-  } = useAuth0();
+  const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
+  console.log("nfjdfnjkdjkdf", user);
 
-  const [logged, setLogged] = useState(null);
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     console.log("kidda ", user);
+  //     dispatch(protectRoute(user));
+  //   } else {
+  //     console.log("kidda false ");
+  //     dispatch(protectRoute(false));
+  //   }
+  // }, [user]);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      setLogged(user);
-    } else {
-      setLogged(false);
-    }
-  }, [isAuthenticated]);
+    dispatch(protectRoute(user));
+  }, [user]);
 
-  
   return (
     <Wrapper className="cart-btn-wrapper">
       <Link

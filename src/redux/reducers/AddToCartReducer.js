@@ -117,6 +117,7 @@ const AddToCartProduct = (state = initialState, action) => {
       console.log("totali tiensn=>", total_items);
       console.log("totali amount=>", total_amount);
 
+      
       return {
         ...state,
         total_items,

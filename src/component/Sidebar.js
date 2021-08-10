@@ -8,7 +8,7 @@ import { removeSider } from "../redux/action/SidebarAction";
 
 import { FaTimes } from "react-icons/fa";
 import styled from "styled-components";
-import { CartButtons } from ".";
+import { CartButtons } from "../component";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Sidebar = () => {
